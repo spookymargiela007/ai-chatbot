@@ -2,19 +2,18 @@
 
 import * as React from 'react'
 import { signIn } from 'next-auth/react'
-
 import { cn } from '@/lib/utils'
 import { Button, type ButtonProps } from '@/components/ui/button'
-import { IconGitHub, IconSpinner } from '@/components/ui/icons'
+import { IconGoogleAds, IconSpinner } from '@/components/ui/icons'
 
 interface LoginButtonProps extends ButtonProps {
-  showGithubIcon?: boolean
+  showGoogleAdsIcon?: boolean
   text?: string
 }
 
 export function LoginButton({
-  text = 'Login with GitHub',
-  showGithubIcon = true,
+  text = 'Login with Google',
+  showGoogleAdsIcon = true,
   className,
   ...props
 }: LoginButtonProps) {
@@ -25,7 +24,7 @@ export function LoginButton({
       onClick={() => {
         setIsLoading(true)
         // next-auth signIn() function doesn't work yet at Edge Runtime due to usage of BroadcastChannel
-        signIn('github', { callbackUrl: `/` })
+        signIn('google', { callbackUrl: `/` })
       }}
       disabled={isLoading}
       className={cn(className)}
@@ -33,8 +32,8 @@ export function LoginButton({
     >
       {isLoading ? (
         <IconSpinner className="mr-2 animate-spin" />
-      ) : showGithubIcon ? (
-        <IconGitHub className="mr-2" />
+      ) : showGoogleAdsIcon ? (
+        <IconGoogleAds className="mr-2" />
       ) : null}
       {text}
     </Button>
